@@ -1,0 +1,17 @@
+<project name="Maven Replace plugin">
+	<body>
+		<menu name="Overview">
+			<item name="Introduction" href="index.html" />
+			<item name="Goals" href="plugin-info.html" />
+		</menu>
+		<menu name="Mass Replacer Examples">
+			<item name="Specifying a character encoding scheme" href="/examples/encoding.html" />
+			<item name="Specifying resource directories" href="/examples/resource-directory.html" />
+			<item name="Including and excluding files and directories" href="/examples/include-exclude.html" />
+			<item name="Excluding default list of files" href="/examples/default-excludes.html" />
+			<item name="Specyfing output directory" href="/examples/target-path.html" />
+			<item name="Using regexp to change the file names" href="/examples/file-rename-regexp.html" />
+		</menu>
+		<menu ref="reports" />
+	</body>
+</project>

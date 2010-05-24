@@ -1,0 +1,6 @@
+<config>
+    <value1>value1</value1>
+    <test>
+        <specialValue>value2</specialValue>
+    </test>
+</config>

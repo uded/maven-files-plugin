@@ -1,0 +1,29 @@
+ ------
+ Specifying a character encoding scheme
+ ------
+ Łukasz Rżanek
+ ------
+ 2010-05-17
+ ------
+ 
+Specyfing target path to write the files to
+
+ In order to output (copy) the files to the specified folder, just after those will be processed, one can extend resources
+ declaration to include <<<targetPath>>>. If the plugin will find that information, it will copy the resulting files to 
+ that folder.
+ 
++-----+
+<project>
+ ...
+ <build>
+   ...
+   <resources>
+     <resource>
+       <targetPath> [your folder here] </targetPath>
+     </resource>
+   </resources>
+   ...
+ </build>
+ ...
+</project>
++-----+ 

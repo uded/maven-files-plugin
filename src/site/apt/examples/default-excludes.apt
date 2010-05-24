@@ -1,0 +1,38 @@
+ ------
+ Specifying a character encoding scheme
+ ------
+ Łukasz Rżanek
+ ------
+ 2010-05-16
+ ------
+ 
+Exluding default list of extensions
+
+ Usually there is a list of files that simply should not be processed by this plugin. The list of files includes, 
+ usually, images, videos and other binaries. 
+ 
+ To exclude a default list of files, which includes extensions like those mentioned above, you can simply order 
+ the plugin to do so. 
+  
++-----+
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>pl.radical.mojos</groupId>
+        <artifactId>maven-replace-plugin</artifactId>
+        <version>${project.version}</version>
+        <configuration>
+          ...
+          <excludeDefaults>true</excludeDefaults>
+          ...
+        </configuration>
+      </plugin>
+    </plugins>
+    ...
+  </build>
+  ...
+</project>
++-----+
+ 

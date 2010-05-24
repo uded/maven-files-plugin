@@ -1,0 +1,115 @@
+ ------
+ Including and excluding files and directories
+ ------
+ Łukasz Rżanek
+ ------
+ 2010-05-16
+ ------
+
+Including and excluding files from the processed resources
+
+ When specifying a resource directory, every file within that directory should not be used to replace the content.
+ It may be that configuration files are to be processed and the rest of the files would be just ignored. 
+
+ To include a resource, we only need to add an <<<\<includes\>>>> element.
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <resources>
+      <resource>
+        <directory> [your directory] </directory>
+        <includes>
+          <include> [resource file #1] </include>
+          <include> [resource file #2] </include>
+          ...
+          <include> [resource file #n] </include>
+        </includes>
+      </resource>
+      ...
+    </resources>
+    ...
+  </build>
+  ...
+</project>
++-----+
+
+ And to exclude a resource, we only need to add an <<<\<excludes\>>>> element.
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <resources>
+      <resource>
+        <directory> [your directory] </directory>
+        <excludes>
+          <exclude> [non-resource file #1] </exclude>
+          <exclude> [non-resource file #2] </exclude>
+          <exclude> [non-resource file #3] </exclude>
+          ...
+          <exclude> [non-resource file #n] </exclude>
+        </excludes>
+      </resource>
+      ...
+    </resources>
+    ...
+  </build>
+  ...
+</project>
++-----+
+
+ For example, if we want to include all xml and properties files under our <<<src/my-resources>>> directory and in all 
+ its subdirectories, we can do the following:
+
++-----+
+<project>
+  ...
+  <build>
+    ...
+    <resources>
+      <resource>
+        <directory> src/my-resources </directory>
+        <includes>
+          <include> **/*.xml </include>
+          <include> **/*.properties </include>
+        </includes>
+      </resource>
+      ...
+    </resources>
+    ...
+  </build>
+  ...
+</project>
++-----+
+
+ Of course, we can also have both <<<\<includes\>>>> and <<<\<excludes\>>>> elements. For example, if we want to include 
+ all xml files that does not contain the word "test" in their filename.
+
++-----+
+<project>
+  ...
+  <name>My Resources Plugin Practice Project</name>
+  ...
+  <build>
+    ...
+    <resources>
+      <resource>
+        <directory> src/my-resources </directory>
+        <includes>
+          <include> **/*.xml </include>
+        </inclues>
+        <excludes>
+          <exclude> **/*test*.* </exclude>
+        </excludes>
+      </resource>
+      ...
+    </resources>
+    ...
+  </build>
+  ...
+</project>
++-----+

@@ -1,0 +1,67 @@
+ ------
+ Specifying a character encoding scheme
+ ------
+ Łukasz Rżanek
+ ------
+ 2010-05-18
+ ------
+ 
+Renaming files in batch
+
+ If there is a need to replace the file names as they are processed by this plugin, a file rename Regular Expression
+ pattern can be used to achieve that.
+ 
+ By adding <<<fileRenameRegex>>> entry a pattern and replace string can be specified.
+ 
++-----+
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>pl.radical.mojos</groupId>
+        <artifactId>maven-replace-plugin</artifactId>
+        <version>${project.version}</version>
+        <configuration>
+          ...
+          <fileRenameRegex>
+            <pattern>\.tmpl$</pattern>
+            <replace>.out</replace>
+          <fileRenameRegex>
+          ...
+        </configuration>
+      </plugin>
+    </plugins>
+    ...
+  </build>
+  ...
+</project>
++-----+
+ 
+ A more complex scenarios can be used as well, where a regular expression pattern can specify a pattern based 
+ replacements:
+ 
++-----+
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>pl.radical.mojos</groupId>
+        <artifactId>maven-replace-plugin</artifactId>
+        <version>${project.version}</version>
+        <configuration>
+          ...
+          <fileRenameRegex>
+            <pattern>(.+)\.(.+).tmpl$</pattern>
+            <replace>$2.$1.out</replace>
+          <fileRenameRegex>
+          ...
+        </configuration>
+      </plugin>
+    </plugins>
+    ...
+  </build>
+  ...
+</project>
++-----+

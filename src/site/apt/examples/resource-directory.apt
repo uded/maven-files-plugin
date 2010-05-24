@@ -1,0 +1,78 @@
+ ------
+ Specifying resource directories
+ ------
+ Łukasz Rżanek
+ ------
+ 2010-05-16
+ ------
+
+Specifying resource directories
+
+ By default, Maven will look for your project's resources under
+ <<<src/main/resources>>>.
+
++-----+
+Project
+|-- pom.xml
+`-- src
+    `-- main
+        `-- resources
++-----+
+
+ However, all your resources may not be in <<<src/main/resources>>>. Thus, you'd have
+ to specify those directories by adding the following to your POM.
+
++-----+
+<project>
+ ...
+ <build>
+   ...
+   <resources>
+     <resource>
+       <directory> [your folder here] </directory>
+     </resource>
+   </resources>
+   ...
+ </build>
+ ...
+</project>
++-----+
+
+ So if your resources resides in <<<src/my-resources>>>
+
++-----+
+Project
+|-- pom.xml
+`-- src
+    `-- my-resources
++-----+
+
+ you can specify that directory by doing the following:
+
++-----+
+   ...
+   <resources>
+     <resource>
+       <directory>src/my-resources</directory>
+     </resource>
+   </resources>
+   ...
++-----+
+
+ Furthermore, you can have several directories by adding multiple <<<\<resource\>>>> elements:
+
++-----+
+   ...
+   <resources>
+     <resource>
+       <directory>resource1</directory>
+     </resource>
+     <resource>
+       <directory>resource2</directory>
+     </resource>
+     <resource>
+       <directory>resource3</directory>
+     </resource>
+   </resources>
+   ...
++-----+
