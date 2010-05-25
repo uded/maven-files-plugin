@@ -1,6 +1,6 @@
 package pl.radical.mojos.files.replace;
 
-import pl.radical.mojos.files.BaseFileMojo;
+import pl.radical.mojos.files.AbstractFileMojo;
 import pl.radical.mojos.replace.utils.FileRenameRegexp;
 
 import java.io.File;
@@ -23,7 +23,7 @@ import org.codehaus.plexus.util.DirectoryScanner;
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
  * @author Radical Creations &copy;2010
  */
-public abstract class AbstractMassReplacerMojo extends BaseFileMojo {
+public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 
 	/**
 	 * It's usually a very bad idea to search-and-replace string within binary files like PNG, JPG, AVI, etc. Default

@@ -12,7 +12,7 @@ import org.apache.maven.project.MavenProject;
  * @author Radical Creations &copy;2010
  * @phase process-resources
  */
-public abstract class BaseFileMojo extends AbstractMojo {
+public abstract class AbstractFileMojo extends AbstractMojo {
 	/**
 	 * Internal Maven's project information
 	 * 
