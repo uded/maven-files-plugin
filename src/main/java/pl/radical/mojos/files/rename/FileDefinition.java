@@ -7,15 +7,15 @@ public class FileDefinition {
 
 	private File outputFile;
 
-	private boolean silent;
-	
-	private boolean forceOverwrite;
+	private Boolean silent;
+
+	private Boolean forceOverwrite;
 
 	public File getInputFile() {
 		return inputFile;
 	}
 
-	public void setInputFile(File inputFile) {
+	public void setInputFile(final File inputFile) {
 		this.inputFile = inputFile;
 	}
 
@@ -23,23 +23,23 @@ public class FileDefinition {
 		return outputFile;
 	}
 
-	public void setOutputFile(File outputFile) {
+	public void setOutputFile(final File outputFile) {
 		this.outputFile = outputFile;
 	}
 
-	public boolean isSilent() {
+	public Boolean isSilent() {
 		return silent;
 	}
 
-	public void setSilent(boolean silent) {
+	public void setSilent(final boolean silent) {
 		this.silent = silent;
 	}
 
-	public boolean isForceOverwrite() {
+	public Boolean isForceOverwrite() {
 		return forceOverwrite;
 	}
 
-	public void setForceOverwrite(boolean forceOverwrite) {
+	public void setForceOverwrite(final boolean forceOverwrite) {
 		this.forceOverwrite = forceOverwrite;
 	}
 
