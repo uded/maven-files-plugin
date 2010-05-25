@@ -1,4 +1,4 @@
-package pl.radical.mojos.replace;
+package pl.radical.mojos.files.replace;
 
 import pl.radical.mojos.replace.utils.PropertiesLoader;
 

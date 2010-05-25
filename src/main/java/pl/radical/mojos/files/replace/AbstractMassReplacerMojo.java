@@ -1,5 +1,6 @@
-package pl.radical.mojos.replace;
+package pl.radical.mojos.files.replace;
 
+import pl.radical.mojos.files.BaseFileMojo;
 import pl.radical.mojos.replace.utils.FileRenameRegexp;
 
 import java.io.File;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -21,7 +23,8 @@ import org.codehaus.plexus.util.DirectoryScanner;
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
  * @author Radical Creations &copy;2010
  */
-public abstract class AbstractMassReplacerMojo extends BaseAbstractReplacerMojo {
+public abstract class AbstractMassReplacerMojo extends BaseFileMojo {
+
 	/**
 	 * It's usually a very bad idea to search-and-replace string within binary files like PNG, JPG, AVI, etc. Default
 	 * exclude list contains entries for all those files. The list will also exclude folders usually used during
@@ -48,12 +51,10 @@ public abstract class AbstractMassReplacerMojo extends BaseAbstractReplacerMojo 
 	 * 		&lt;exclude&gt;*.type&lt;/exclude&gt;
 	 * 	&lt;/excludes&gt;
 	 * &lt;/resource&gt;
-	 * 
-	 * &lt;pre&gt;
+	 * </pre>
 	 * 
 	 * @parameter
 	 * @required
-	 * 
 	 */
 	protected Resource[] resources;
 
@@ -72,6 +73,31 @@ public abstract class AbstractMassReplacerMojo extends BaseAbstractReplacerMojo 
 	 * @parameter
 	 */
 	protected FileRenameRegexp fileRenameRegexp;
+
+	/**
+	 * Whether to use or not use project properties. Usually it's a good thing, while you might wanto to reffer to thins
+	 * like <code>${project.version}</code> automatically. But sometimes one may want to keep them separated, and this
+	 * is switch to do so.
+	 * 
+	 * @parameter default-value=true;
+	 */
+	protected boolean useProjectProperties;
+
+	/**
+	 * List of tokens, in form of name-value pair, that should be replaced in given file(s).
+	 * 
+	 * @properties
+	 */
+	protected Properties tokens;
+
+	/**
+	 * List of properties files to read the token and values from.
+	 * 
+	 * @parameter
+	 */
+	protected List<String> filters;
+
+	protected Map<String, String> tokenValueMap = new HashMap<String, String>();
 
 	/**
 	 * <p>

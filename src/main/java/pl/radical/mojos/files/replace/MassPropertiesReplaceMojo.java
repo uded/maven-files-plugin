@@ -1,4 +1,4 @@
-package pl.radical.mojos.replace;
+package pl.radical.mojos.files.replace;
 
 import pl.radical.mojos.replace.utils.PropertiesLoader;
 
@@ -84,7 +84,7 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 		try {
 			final PropertiesLoader propertiesLoader = new PropertiesLoader(getDelimiters());
 
-			if (useMavenProperties) {
+			if (useProjectProperties) {
 				// Maven project properties
 				if (project.getProperties() != null) {
 					propertiesLoader.loadProperties(project.getProperties());
