@@ -1,4 +1,4 @@
-package pl.radical.mojos.replace.utils;
+package pl.radical.mojos.tests.utils;
 
 import org.apache.maven.plugin.logging.SystemStreamLog;
 

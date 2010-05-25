@@ -1,9 +1,9 @@
-package pl.radical.mojos.replace;
+package pl.radical.mojos.files.replace;
 
 import static org.junit.Assert.assertEquals;
 
 import pl.radical.mojos.replace.utils.FileRenameRegexp;
-import pl.radical.mojos.replace.utils.Logger;
+import pl.radical.mojos.tests.utils.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,14 +25,14 @@ public class MassPropertiesReplaceMojoTest {
 		final Set<String> delimiters = new HashSet<String>();
 		delimiters.add("${-}");
 
-		final AbstractMassReplacerMojo mojo = new MassPropertiesReplaceMojo();
+		final MassPropertiesReplaceMojo mojo = new MassPropertiesReplaceMojo();
 		mojo.delimiters = delimiters;
 		mojo.getDelimiters();
 	}
 
 	@Test
 	public void testDefaultDelimiters() throws MojoExecutionException {
-		final AbstractMassReplacerMojo mojo = new MassPropertiesReplaceMojo();
+		final MassPropertiesReplaceMojo mojo = new MassPropertiesReplaceMojo();
 		final Set<String> delimiters = mojo.getDelimiters();
 
 		assertEquals(2, delimiters.size());
