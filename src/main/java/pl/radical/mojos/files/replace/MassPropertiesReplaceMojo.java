@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Random;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
@@ -106,7 +107,10 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 			tokenValueMap.putAll(propertiesLoader.getTokens());
 
 			if (getLog().isDebugEnabled()) {
-				final File file = new File("target/tokenValueMap." + mavenSession.getExecutionProperties().getProperty("id") + ".properties");
+				// TODO Execution ID would be nice
+				// String id = mavenSession.getExecutionProperties().getProperty("id");
+				final String id = Integer.toString(new Random().nextInt(1000));
+				final File file = new File("target/tokenValueMap." + id + ".properties");
 				getLog().debug("Outputting the tokenValueMap currently in use to file: " + file.toString());
 				propertiesLoader.writeToFile(file);
 			}
