@@ -1,5 +1,7 @@
 package pl.radical.mojos.filerename;
 
+import pl.radical.mojos.replace.utils.FileRenameRegexp;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +43,7 @@ public class MultiFileRenameMojo extends AbstractMojo {
 
 		final Map<File, File> files = getFileList();
 
-		for (Entry<File, File> entry : files.entrySet()) {
+		for (final Entry<File, File> entry : files.entrySet()) {
 			if (getLog().isDebugEnabled()) {
 				getLog().debug(String.format("Renaming the file from [%s] to [%s]", entry.getKey().getName(), entry.getValue().getName()));
 			}
@@ -97,7 +99,7 @@ public class MultiFileRenameMojo extends AbstractMojo {
 				getLog().debug("-- adding file: " + file);
 			}
 
-			String outputFileName = file.replaceAll(fileRenameRegexp.getPattern(), fileRenameRegexp.getReplace() != null ? fileRenameRegexp
+			final String outputFileName = file.replaceAll(fileRenameRegexp.getPattern(), fileRenameRegexp.getReplace() != null ? fileRenameRegexp
 					.getReplace() : "");
 			workingFiles.put(new File(resource.getDirectory() + "/" + file), new File(resource.getDirectory() + "/" + outputFileName)); // NOPMD
 		}
