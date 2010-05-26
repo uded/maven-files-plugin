@@ -33,6 +33,7 @@ public class MassPropertiesReplaceMojoTest {
 	@Test
 	public void testDefaultDelimiters() throws MojoExecutionException {
 		final MassPropertiesReplaceMojo mojo = new MassPropertiesReplaceMojo();
+		mojo.setDelimiters();
 		final Set<String> delimiters = mojo.actualDelimiters;
 
 		assertEquals(2, delimiters.size());
@@ -62,7 +63,7 @@ public class MassPropertiesReplaceMojoTest {
 		final AbstractMassReplacerMojo mojo = new MassPropertiesReplaceMojo();
 		mojo.setLog(new Logger());
 
-		mojo.delimiters = getDelimitersList();
+		mojo.setDelimiters();
 		mojo.resources = getResources();
 		mojo.excludeDefaults = true;
 		mojo.filters = filters;
