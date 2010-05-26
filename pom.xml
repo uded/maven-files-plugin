@@ -8,10 +8,7 @@
 	<version>0.4.9-SNAPSHOT</version>
 
 	<name>maven-fileshelper-plugin</name>
-	<description>Mave files-helper plugin is a collection of goals helpfull in everyday work with Maven based projects. It might be that you need
-	to generate a configuration files for your aplication by replacing hundreds and hundreds of different properties, it might be
-	that you just want to change the file names or do something else, which usually is very simple and you might decide to use AntRun plugin. Or not... 
-	because this is your plan A (B for some :-)</description>
+	<description>Mave files-helper plugin is a collection of goals helpfull in everyday work with Maven based projects. It might be that you need to generate a configuration files for your aplication by replacing hundreds and hundreds of different properties, it might be that you just want to change the file names or do something else, which usually is very simple and you might decide to use AntRun plugin. Or not... because this is your plan A (B for some :-)</description>
 	<url>http://projekty.radical.com.pl/projects/maven-fileshelper-plugin</url>
 	<inceptionYear>2010</inceptionYear>
 
