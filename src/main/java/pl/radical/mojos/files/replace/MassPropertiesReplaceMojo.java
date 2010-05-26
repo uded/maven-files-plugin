@@ -29,7 +29,6 @@ import org.apache.maven.project.MavenProject;
 public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.apache.maven.plugin.Mojo#execute()
 	 */
 	public final void execute() throws MojoExecutionException, MojoFailureException {
@@ -116,11 +115,15 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 				propertiesLoader.writeToFile(file);
 			}
 		} catch (final FileNotFoundException e) {
-			getLog().error("A property was not found", e);
-			throw new MojoExecutionException("A property was not found", e);
+			if (!ignoreMissingFilter) {
+				getLog().error("A property was not found", e);
+				throw new MojoExecutionException("A property was not found", e);
+			}
 		} catch (final IOException e) {
-			getLog().error("A property file cannot be read", e);
-			throw new MojoExecutionException("A property file cannot be read", e);
+			if (!ignoreMissingFilter) {
+				getLog().error("A property file cannot be read", e);
+				throw new MojoExecutionException("A property file cannot be read", e);
+			}
 		}
 	}
 }

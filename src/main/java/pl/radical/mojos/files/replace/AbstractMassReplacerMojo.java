@@ -97,6 +97,13 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	 */
 	protected List<String> filters;
 
+	/**
+	 * Whether to ignore missing filter, so it will not cause failing the build itself.
+	 * 
+	 * @parameter default-value=false
+	 */
+	protected boolean ignoreMissingFilter;
+
 	protected Map<String, String> tokenValueMap = new HashMap<String, String>();
 	protected Set<String> actualDelimiters = new HashSet<String>();
 
