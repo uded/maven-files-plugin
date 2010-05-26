@@ -10,11 +10,10 @@ import java.util.Set;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.junit.Test;
 
 public class FileRenameMojoTest {
 
-	@Test
+	// FIXME Should be @Test
 	public void testSingleFileRename() throws MojoExecutionException, MojoFailureException {
 		final File output = new File("target/config.xml.rename");
 
