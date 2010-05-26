@@ -19,10 +19,4 @@ public class FileRenameRegexp {
 	public final void  setReplace(final String replace) {
 		this.replace = replace;
 	}
-
-	@Override
-	public final String toString() {
-		return String.format("[%s] will be replace to [%s]", pattern, replace);
-	}
-
 }
