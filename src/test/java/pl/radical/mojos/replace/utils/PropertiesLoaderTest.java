@@ -23,10 +23,18 @@ public class PropertiesLoaderTest {
 		propertiesLoader.loadProperties("src/test/data/002_test.properties");
 		propertiesLoader.loadProperties("src/test/data/003_test.properties");
 
+		// 001_test
 		assertEquals("value1", propertiesLoader.getTokens().get("token1"));
 		assertEquals("value2", propertiesLoader.getTokens().get("token2"));
+		assertEquals("replaced-value1_value5", propertiesLoader.getTokens().get("complex.token"));
+
+		// 002_test
 		assertEquals("replaced-value1", propertiesLoader.getTokens().get("token3"));
 		assertEquals("replaced-value2", propertiesLoader.getTokens().get("token4"));
-		assertEquals("replaced-value1_value5", propertiesLoader.getTokens().get("complex.token"));
+
+		// 003_test
+		assertEquals("value5", propertiesLoader.getTokens().get("token5"));
+		assertEquals("value1_value2", propertiesLoader.getTokens().get("token6"));
+		assertEquals("value1-delimitered", propertiesLoader.getTokens().get("token7"));
 	}
 }
