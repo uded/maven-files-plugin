@@ -3,16 +3,17 @@ package pl.radical.mojos.replace.utils;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.maven.plugin.MojoExecutionException;
 import org.junit.Test;
 
 public class PropertiesLoaderTest {
 
 	@Test
-	public void testPropertiesLoader() throws MojoExecutionException {
+	public void testPropertiesLoader() throws FileNotFoundException, IOException {
 		final Set<String> delimiters = new HashSet<String>();
 		delimiters.add("${|}");
 		delimiters.add("@|@");
@@ -20,9 +21,9 @@ public class PropertiesLoaderTest {
 
 		final PropertiesLoader propertiesLoader = new PropertiesLoader(delimiters);
 
-		propertiesLoader.loadProperties("src/test/data/001_test.properties");
-		propertiesLoader.loadProperties("src/test/data/002_test.properties");
-		propertiesLoader.loadProperties("src/test/data/003_test.properties");
+		propertiesLoader.loadProperties(new File("src/test/data/001_test.properties"));
+		propertiesLoader.loadProperties(new File("src/test/data/002_test.properties"));
+		propertiesLoader.loadProperties(new File("src/test/data/003_test.properties"));
 
 		// 001_test
 		assertEquals("value1", propertiesLoader.getTokens().get("token1"));
@@ -39,20 +40,8 @@ public class PropertiesLoaderTest {
 		assertEquals("value1-delimitered", propertiesLoader.getTokens().get("token7"));
 	}
 
-	@Test(expected = MojoExecutionException.class)
-	public void testStringWrongPropertiesLoader() throws MojoExecutionException {
-		final Set<String> delimiters = new HashSet<String>();
-		delimiters.add("${|}");
-		delimiters.add("@|@");
-		delimiters.add("@@|@@");
-
-		final PropertiesLoader propertiesLoader = new PropertiesLoader(delimiters);
-
-		propertiesLoader.loadProperties("src/test/data/wrong_test.properties");
-	}
-
-	@Test(expected = MojoExecutionException.class)
-	public void testFileWrongPropertiesLoader() throws MojoExecutionException {
+	@Test(expected = FileNotFoundException.class)
+	public void testFileWrongPropertiesLoader() throws FileNotFoundException, IOException {
 		final Set<String> delimiters = new HashSet<String>();
 		delimiters.add("${|}");
 		delimiters.add("@|@");

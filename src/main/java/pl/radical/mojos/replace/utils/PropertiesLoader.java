@@ -13,7 +13,6 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.AutoCloseInputStream;
 import org.apache.commons.lang.text.StrSubstitutor;
-import org.apache.maven.plugin.MojoExecutionException;
 
 /**
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
@@ -28,34 +27,14 @@ public class PropertiesLoader {
 		this.delimiters = delimiters;
 	}
 
-	public final void loadProperties(final String propertiesFile) throws MojoExecutionException {
-		final File file = new File(propertiesFile);
-
-		if (file.canRead()) {
-			loadProperties(file);
-		} else {
-			if (!file.exists()) {
-				throw new MojoExecutionException(String.format("The file [%s] was not found!", file.getAbsolutePath()));
-			}
-			if (!file.canRead()) {
-				throw new MojoExecutionException(String.format("The file [%s] is not readable!", file.getAbsolutePath()));
-			}
-		}
-	}
-
-	public final void loadProperties(final File propertiesFile) throws MojoExecutionException {
+	public final void loadProperties(final File propertiesFile) throws FileNotFoundException, IOException {
 		final Properties props = new Properties();
 		AutoCloseInputStream fis = null;
 
-		try {
-			fis = new AutoCloseInputStream(new FileInputStream(propertiesFile));
-			props.load(fis);
-			loadProperties(props);
-		} catch (final FileNotFoundException e) {
-			throw new MojoExecutionException(String.format("A property file [%s] was not found", propertiesFile), e);
-		} catch (final IOException e) {
-			throw new MojoExecutionException(String.format("A property file [%s] cannot be read", propertiesFile), e);
-		}
+		fis = new AutoCloseInputStream(new FileInputStream(propertiesFile));
+		props.load(fis);
+		loadProperties(props);
+
 	}
 
 	public final void loadProperties(final Properties properties) throws IOException {

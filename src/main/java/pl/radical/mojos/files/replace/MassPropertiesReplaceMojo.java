@@ -102,7 +102,7 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 			}
 
 			for (final String propertyFile : filters) {
-				propertiesLoader.loadProperties(propertyFile);
+				propertiesLoader.loadProperties(new File(propertyFile));
 			}
 
 			tokenValueMap.putAll(propertiesLoader.getTokens());
