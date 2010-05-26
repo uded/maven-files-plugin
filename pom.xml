@@ -9,22 +9,22 @@
 
 	<name>maven-files-plugin</name>
 	<description>Mave files-helper plugin is a collection of goals helpfull in everyday work with Maven based projects. It might be that you need to generate a configuration files for your aplication by replacing hundreds and hundreds of different properties, it might be that you just want to change the file names or do something else, which usually is very simple and you might decide to use AntRun plugin. Or not... because this is your plan A (B for some :-)</description>
-	<url>http://projekty.radical.com.pl/projects/maven-fileshelper-plugin</url>
+	<url>http://projekty.radical.com.pl/projects/maven-files-plugin</url>
 	<inceptionYear>2010</inceptionYear>
 
 	<issueManagement>
 		<system>Redmine</system>
-		<url>http://projekty.radical.com.pl/projects/maven-fileshelper-plugin/issues</url>
+		<url>http://projekty.radical.com.pl/projects/maven-files-plugin/issues</url>
 	</issueManagement>
 	<ciManagement>
 		<system>Hudson</system>
-		<url>http://dev.radical.com.pl/hudson/job/maven-fileshelper-plugin/</url>
+		<url>http://dev.radical.com.pl/hudson/job/maven-files-plugin/</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:git:git://github.com/uded/maven-fileshelper-plugin.git</connection>
-		<developerConnection>scm:svn:https://svn.radical.com.pl/maven2/maven-fileshelper-plugin/</developerConnection>
+		<connection>scm:git:git://github.com/uded/maven-files-plugin.git</connection>
+		<developerConnection>scm:svn:https://svn.radical.com.pl/maven2/maven-files-plugin/</developerConnection>
 		<tag>HEAD</tag>
-		<url>http://projekty.radical.com.pl/projects/maven-fileshelper-plugin/repository</url>
+		<url>http://projekty.radical.com.pl/projects/maven-files-plugin/repository</url>
 	</scm>
 
 	<developers>
@@ -72,7 +72,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
 				<configuration>
-					<goalPrefix>maven-fileshelper-plugin</goalPrefix>
+					<goalPrefix>maven-files-plugin</goalPrefix>
 				</configuration>
 				<executions>
 					<execution>
