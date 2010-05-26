@@ -46,8 +46,11 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 
 	/**
 	 * @param files
+	 *            a list of files in form of a map with source and target defined
 	 * @param tokenValueMap
+	 *            a list of tokens and it's values to be replaced in files
 	 * @throws MojoExecutionException
+	 *             an exception thrown usually while reading the input file or while saving the new one
 	 */
 	protected void replaceTokens(final Map<File, File> files, final Map<String, String> tokens) throws MojoExecutionException {
 		String content;
