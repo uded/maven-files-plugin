@@ -98,7 +98,7 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	protected List<String> filters;
 
 	protected Map<String, String> tokenValueMap = new HashMap<String, String>();
-	protected Set<String> actualDelimiters;
+	protected Set<String> actualDelimiters = new HashSet<String>();
 
 	/**
 	 * <p>
