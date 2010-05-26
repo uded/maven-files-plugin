@@ -27,13 +27,13 @@ public class MassPropertiesReplaceMojoTest {
 
 		final MassPropertiesReplaceMojo mojo = new MassPropertiesReplaceMojo();
 		mojo.delimiters = delimiters;
-		mojo.getDelimiters();
+		mojo.setDelimiters();
 	}
 
 	@Test
 	public void testDefaultDelimiters() throws MojoExecutionException {
 		final MassPropertiesReplaceMojo mojo = new MassPropertiesReplaceMojo();
-		final Set<String> delimiters = mojo.getDelimiters();
+		final Set<String> delimiters = mojo.actualDelimiters;
 
 		assertEquals(2, delimiters.size());
 		assertEquals(true, delimiters.contains("@|@"));
