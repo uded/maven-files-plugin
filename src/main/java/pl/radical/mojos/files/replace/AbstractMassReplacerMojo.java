@@ -41,16 +41,18 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	 * The list should be specified in form of:
 	 * 
 	 * <pre>
-	 * &lt;resource&gt;
-	 * 	&lt;directory&gt;/a/source/path&lt;/directory&gt;
-	 * 	&lt;targetPath&gt;/a/target/path&lt;/targetPath&gt;
-	 * 	&lt;includes&gt;
-	 * 		&lt;include&gt;*&lt;/includes&gt;
-	 * 	&lt;/includes&gt;
-	 * 	&lt;excludes&gt;
-	 * 		&lt;exclude&gt;*.type&lt;/exclude&gt;
-	 * 	&lt;/excludes&gt;
-	 * &lt;/resource&gt;
+	 * &lt;resources&gt;
+	 * 	&lt;resource&gt;
+	 * 		&lt;directory&gt;/a/source/path&lt;/directory&gt;
+	 * 		&lt;targetPath&gt;/a/target/path&lt;/targetPath&gt;
+	 * 		&lt;includes&gt;
+	 * 			&lt;include&gt;*&lt;/includes&gt;
+	 * 		&lt;/includes&gt;
+	 * 		&lt;excludes&gt;
+	 * 			&lt;exclude&gt;*.type&lt;/exclude&gt;
+	 * 		&lt;/excludes&gt;
+	 * 	&lt;/resource&gt;
+	 * &lt;resources&gt;
 	 * </pre>
 	 * 
 	 * @parameter
@@ -68,7 +70,8 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	protected Set<String> delimiters;
 
 	/**
-	 * By defining <code>fileRenameRegexp</code> the files generated via
+	 * By defining <code>fileRenameRegexp</code> the files generated via this plugin can be renamed automatically using
+	 * simple regexp.
 	 * 
 	 * @parameter
 	 */
