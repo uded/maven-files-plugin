@@ -72,7 +72,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
 				<configuration>
-					<goalPrefix>maven-files-plugin</goalPrefix>
+					<goalPrefix>files</goalPrefix>
 				</configuration>
 				<executions>
 					<execution>
