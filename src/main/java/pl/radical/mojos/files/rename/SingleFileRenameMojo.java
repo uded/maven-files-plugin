@@ -48,7 +48,7 @@ import org.apache.maven.plugin.MojoFailureException;
 public class SingleFileRenameMojo extends BaseFileReplacerMojo {
 
 	/**
-	 * A set of jobs definitions for this plugin to use. This can be supplied in a form of:
+	 * A set of jobs definitions for this plugin to use.
 	 * 
 	 * @parameter
 	 * @required
