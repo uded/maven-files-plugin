@@ -11,35 +11,35 @@ public class FileDefinition {
 
 	private Boolean forceOverwrite;
 
-	public File getInputFile() {
+	public final File getInputFile() {
 		return inputFile;
 	}
 
-	public void setInputFile(final File inputFile) {
+	public final void setInputFile(final File inputFile) {
 		this.inputFile = inputFile;
 	}
 
-	public File getOutputFile() {
+	public final File getOutputFile() {
 		return outputFile;
 	}
 
-	public void setOutputFile(final File outputFile) {
+	public final void setOutputFile(final File outputFile) {
 		this.outputFile = outputFile;
 	}
 
-	public Boolean isSilent() {
+	public final Boolean isSilent() {
 		return silent;
 	}
 
-	public void setSilent(final boolean silent) {
+	public final void setSilent(final boolean silent) {
 		this.silent = silent;
 	}
 
-	public Boolean isForceOverwrite() {
+	public final Boolean isForceOverwrite() {
 		return forceOverwrite;
 	}
 
-	public void setForceOverwrite(final boolean forceOverwrite) {
+	public final void setForceOverwrite(final boolean forceOverwrite) {
 		this.forceOverwrite = forceOverwrite;
 	}
 
