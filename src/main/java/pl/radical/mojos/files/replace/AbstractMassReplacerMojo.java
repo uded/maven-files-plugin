@@ -98,6 +98,7 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	protected List<String> filters;
 
 	protected Map<String, String> tokenValueMap = new HashMap<String, String>();
+	protected Set<String> actualDelimiters;
 
 	/**
 	 * <p>
@@ -109,17 +110,17 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	 * @throws MojoExecutionException
 	 *             if delimiter was not entered in correct form
 	 */
-	protected Set<String> getDelimiters() throws MojoExecutionException {
+	protected void setDelimiters() throws MojoExecutionException {
+		final Set<String> workingDelimiters = new HashSet<String>();
 		if (delimiters == null || delimiters.isEmpty()) {
-			delimiters = new HashSet<String>();
-			delimiters.add("@|@");
-			delimiters.add("${|}");
+			workingDelimiters.add("@|@");
+			workingDelimiters.add("${|}");
 		} else {
 			for (final String delimiter : delimiters) {
 				if (delimiter.matches(".*\\|.*")) {
 					if (getLog().isDebugEnabled()) {
 						final String[] delims = delimiter.split("\\|");
-						delimiters.add(delimiter);
+						workingDelimiters.add(delimiter);
 						getLog().debug("Added prefix: \"" + delims[0] + "\" and suffix: \"" + delims[1] + "\".");
 					}
 				} else {
@@ -128,7 +129,7 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 				}
 			}
 		}
-		return delimiters;
+		actualDelimiters.addAll(workingDelimiters);
 	}
 
 	/**

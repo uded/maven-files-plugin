@@ -40,6 +40,7 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 		final Map<File, File> files = getFileList();
 
 		// Start actual work
+		setDelimiters();
 		readProperties(project);
 		replaceTokens(files, tokenValueMap);
 	}
@@ -64,7 +65,7 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 
 				content = FileUtils.readFileToString(entry.getKey(), encoding);
 
-				for (final String delimiter : getDelimiters()) {
+				for (final String delimiter : actualDelimiters) {
 					final String[] delims = delimiter.split("\\|");
 					content = StrSubstitutor.replace(content, tokens, delims[0], delims[1]); // NOPMD
 				}
@@ -83,7 +84,7 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 	@Override
 	public void readProperties(final MavenProject project) throws MojoExecutionException {
 		try {
-			final PropertiesLoader propertiesLoader = new PropertiesLoader(getDelimiters());
+			final PropertiesLoader propertiesLoader = new PropertiesLoader(actualDelimiters);
 
 			if (useProjectProperties) {
 				// Maven project properties

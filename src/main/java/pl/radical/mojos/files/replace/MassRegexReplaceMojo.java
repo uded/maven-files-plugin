@@ -24,7 +24,7 @@ public class MassRegexReplaceMojo extends AbstractMassReplacerMojo {
 	}
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		final PropertiesLoader propertiesLoader = new PropertiesLoader(getDelimiters());
+		final PropertiesLoader propertiesLoader = new PropertiesLoader(actualDelimiters);
 
 		for (final String propertyFile : filters) {
 			propertiesLoader.loadProperties(propertyFile);
