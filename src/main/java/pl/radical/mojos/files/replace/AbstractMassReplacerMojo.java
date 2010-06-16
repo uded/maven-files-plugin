@@ -2,22 +2,18 @@ package pl.radical.mojos.files.replace;
 
 import pl.radical.mojos.files.AbstractFileMojo;
 import pl.radical.mojos.replace.utils.FileRenameRegexp;
+import pl.radical.mojos.replace.utils.FilesScanner;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.ResourceBundle;
 import java.util.Set;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.codehaus.plexus.util.DirectoryScanner;
 
 /**
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
@@ -148,84 +144,13 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	 * @return list of files with source and target info
 	 */
 	protected Map<File, File> getFileList() {
+		final FilesScanner filesScanner = new FilesScanner(getLog());
+
 		final Map<File, File> files = new HashMap<File, File>();
 		for (final Resource resource : resources) {
-			files.putAll(getFileList(resource));
+			files.putAll(filesScanner.getFileList(resource, excludeDefaults, fileRenameRegexp));
 		}
 		return files;
-	}
-
-	/**
-	 * Scan the given resource to receive a full files list to work on. It should consist only of the files explicitly
-	 * (or implicitly) included and excluded via plugin configuration. See {@link Resource} for details.
-	 * 
-	 * @param resource
-	 *            a {@link Resource} entry to scan
-	 * @return list of files with source and target info
-	 */
-	protected Map<File, File> getFileList(final Resource resource) {
-		final Map<File, File> workingFiles = new HashMap<File, File>();
-
-		final DirectoryScanner dirScanner = new DirectoryScanner();
-		dirScanner.setBasedir(resource.getDirectory());
-
-		if (resource.getIncludes().size() > 0) {
-			dirScanner.setIncludes(resource.getIncludes().toArray(new String[resource.getIncludes().size()]));
-		}
-		if (resource.getExcludes().size() > 0) {
-			if (excludeDefaults) {
-				final String[] resourceExcludes = resource.getExcludes().toArray(new String[resource.getExcludes().size()]);
-				final String[] excludes = (String[]) ArrayUtils.addAll(resourceExcludes, getDefaultExcludes());
-				dirScanner.setExcludes(excludes);
-			} else {
-				dirScanner.setExcludes(resource.getExcludes().toArray(new String[resource.getExcludes().size()]));
-			}
-		} else {
-			if (excludeDefaults) {
-				dirScanner.setExcludes(getDefaultExcludes());
-			}
-		}
-
-		dirScanner.addDefaultExcludes();
-		dirScanner.scan();
-
-		final String[] includedFiles = dirScanner.getIncludedFiles();
-		for (final String file : includedFiles) {
-			if (getLog().isDebugEnabled()) {
-				getLog().debug("-- adding file: " + file);
-			}
-
-			String outputFileName;
-			if (fileRenameRegexp != null) {
-				outputFileName = file.replaceAll(fileRenameRegexp.getPattern(), fileRenameRegexp.getReplace() != null ? fileRenameRegexp.getReplace() : "");
-			} else {
-				outputFileName = file;
-			}
-
-			if (resource.getTargetPath() != null || resource.getTargetPath().length() > 0) { // NOPMD
-				workingFiles.put(new File(resource.getDirectory() + "/" + file), new File(resource.getTargetPath() + "/" + outputFileName)); // NOPMD
-			} else {
-				workingFiles.put(new File(resource.getDirectory() + "/" + file), new File(resource.getDirectory() + "/" + outputFileName)); // NOPMD
-			}
-		}
-
-		return workingFiles;
-	}
-
-	/**
-	 * Creating a list of common excludes
-	 * 
-	 * @return a list of excludes to consider
-	 */
-	private String[] getDefaultExcludes() {
-		final ResourceBundle excludesList = ResourceBundle.getBundle("defaultExcludes");
-		final List<String> excludes = new ArrayList<String>();
-
-		for (final Enumeration<String> keys = excludesList.getKeys(); keys.hasMoreElements();) {
-			excludes.add(excludesList.getString(keys.nextElement()));
-		}
-
-		return excludes.toArray(new String[excludes.size()]);
 	}
 
 }

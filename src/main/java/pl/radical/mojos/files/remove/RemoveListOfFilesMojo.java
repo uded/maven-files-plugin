@@ -1,6 +1,6 @@
-package pl.radical.mojos.files.rename;
+package pl.radical.mojos.files.remove;
 
-import pl.radical.mojos.replace.utils.FileRenameRegexp;
+import pl.radical.mojos.files.AbstractFileMojo;
 import pl.radical.mojos.replace.utils.FilesScanner;
 
 import java.io.File;
@@ -8,15 +8,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.maven.model.Resource;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.project.MavenProject;
 
 /**
- * @goal rename-files
- * @phase process-resources
+ * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
+ * @author Radical Creations &copy;2010
+ * @goal remove-fileszz
  */
-public class MultiFileRenameMojo extends AbstractMojo {
+public class RemoveListOfFilesMojo extends AbstractFileMojo {
 	/**
 	 * Location of the file.
 	 * 
@@ -25,18 +28,7 @@ public class MultiFileRenameMojo extends AbstractMojo {
 	 */
 	private Resource[] resources;
 
-	/**
-	 * @parameter
-	 * @required
-	 */
-	protected FileRenameRegexp fileRenameRegexp;
-
-	/**
-	 * @parameter default=false
-	 */
-	protected boolean silent;
-
-	public void execute() throws MojoExecutionException {
+	public void execute() throws MojoExecutionException, MojoFailureException {
 		if (getLog().isDebugEnabled()) {
 			getLog().debug("Preparing the list of files to be included");
 		}
@@ -45,14 +37,9 @@ public class MultiFileRenameMojo extends AbstractMojo {
 
 		for (final Entry<File, File> entry : files.entrySet()) {
 			if (getLog().isDebugEnabled()) {
-				getLog().debug(String.format("Renaming the file from [%s] to [%s]", entry.getKey().getName(), entry.getValue().getName()));
+				getLog().debug(String.format("Removing file [%s]", entry.getKey().getName()));
 			}
-			if (!entry.getKey().renameTo(entry.getValue())) {
-				if (!silent) {
-					throw new MojoExecutionException("It was impossible to change the name of the file from " + entry.getKey() + " to "
-							+ entry.getValue());
-				}
-			}
+			FileUtils.deleteQuietly(entry.getKey());
 		}
 	}
 
@@ -70,4 +57,10 @@ public class MultiFileRenameMojo extends AbstractMojo {
 		}
 		return files;
 	}
+
+	@Override
+	public void readProperties(final MavenProject project) throws MojoExecutionException {
+		// TODO Auto-generated method stub
+	}
+
 }
