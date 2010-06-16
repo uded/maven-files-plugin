@@ -4,7 +4,7 @@
 			<item name="Introduction" href="index.html" />
 			<item name="Goals" href="plugin-info.html" />
 		</menu>
-		<menu name="Mass Replacer Examples">
+		<menu name="Complex uses">
 			<item name="Specifying a character encoding scheme" href="/examples/encoding.html" />
 			<item name="Specifying resource directories" href="/examples/resource-directory.html" />
 			<item name="Including and excluding files and directories" href="/examples/include-exclude.html" />
