@@ -29,9 +29,9 @@
 				</executions>
 			</plugin>
 
-			<plugin>
-				<groupId>pl.radical.mojos</groupId>
-				<artifactId>maven-files-plugin</artifactId>
+            <plugin>
+                <groupId>pl.radical.mojos</groupId>
+                <artifactId>maven-files-plugin</artifactId>
 
 				<executions>
 					<execution>
