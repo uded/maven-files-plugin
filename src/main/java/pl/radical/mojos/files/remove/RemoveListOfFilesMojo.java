@@ -17,7 +17,7 @@ import org.apache.maven.project.MavenProject;
 /**
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
  * @author Radical Creations &copy;2010
- * @goal remove-fileszz
+ * @goal remove-files
  */
 public class RemoveListOfFilesMojo extends AbstractFileMojo {
 	/**
