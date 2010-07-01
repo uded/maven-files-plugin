@@ -18,7 +18,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}</outputDirectory>
+							<outputDirectory>${project.build.directory}/test</outputDirectory>
 							<resources>
 								<resource>
 									<directory>${basedir}/src/data</directory>
@@ -42,7 +42,10 @@
 						<configuration>
 							<resources>
 								<resource>
-									<directory>${project.build.directory}/test.txt</directory>
+									<directory>${project.build.directory}/test</directory>
+									<includes>
+									   <include>test.txt</include>
+									</includes>
 								</resource>
 							</resources>
 						</configuration>
