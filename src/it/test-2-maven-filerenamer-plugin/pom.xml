@@ -31,7 +31,7 @@
 
 			<plugin>
 				<groupId>pl.radical.mojos</groupId>
-				<artifactId>maven-filerenamer-plugin</artifactId>
+				<artifactId>maven-files-plugin</artifactId>
 
 				<executions>
 					<execution>
