@@ -153,6 +153,9 @@
 			<releases>
 				<enabled>false</enabled>
 			</releases>
+			<snapshots>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
 			<id>radical-public-snapshots</id>
 			<url>http://maven.radical.com.pl/snapshots</url>
 		</repository>
