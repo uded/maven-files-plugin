@@ -73,8 +73,6 @@ public class FilesScanner {
 				outputFileName = file;
 			}
 
-			System.out.println("targetPath: " + resource.getTargetPath());
-
 			if (resource.getTargetPath() != null || resource.getTargetPath().length() == 0) { // NOPMD
 				workingFiles.put(new File(resource.getDirectory() + "/" + file), new File(resource.getTargetPath() + "/" + outputFileName)); // NOPMD
 			} else {
