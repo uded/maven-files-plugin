@@ -10,8 +10,7 @@
 	   <plugins>
 	       <plugin>
 	           <groupId>pl.radical.mojos</groupId>
-	           <artifactId>maven-replace-plugin</artifactId>
-	           <version>0.1-SNAPSHOT</version>
+	           <artifactId>maven-files-plugin</artifactId>
 	           
 	           <executions>
 	               <execution>
@@ -21,6 +20,8 @@
 	                       <goal>mass-properties-replace</goal>
 	                   </goals>
 	                   <configuration>
+	                       <useProjectProperties>true</useProjectProperties>
+	                   
 	                       <filters>
 	                           <filter>${basedir}/src/main/resources/001_test.properties</filter>
                                <filter>${basedir}/src/main/resources/002_test.properties</filter>

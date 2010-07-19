@@ -17,6 +17,7 @@ public abstract class AbstractFileMojo extends AbstractMojo {
 	 * Internal Maven's project information
 	 * 
 	 * @parameter expression="${project}"
+	 * @required
 	 * @readonly
 	 */
 	protected MavenProject project;

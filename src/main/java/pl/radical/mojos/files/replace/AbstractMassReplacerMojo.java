@@ -14,12 +14,20 @@ import java.util.Set;
 
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.project.path.PathTranslator;
 
 /**
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
  * @author Radical Creations &copy;2010
  */
 public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
+
+	/**
+	 * Path Translator needed by the ExpressionEvaluator
+	 * 
+	 * @component role="org.apache.maven.project.path.PathTranslator"
+	 */
+	protected PathTranslator translator;
 
 	/**
 	 * It's usually a very bad idea to search-and-replace string within binary files like PNG, JPG, AVI, etc. Default
@@ -58,8 +66,8 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 
 	/**
 	 * <b>Overrides</b> the default delimiter list. The delimiters should be stated as two strings separated with pipe
-	 * <b>|</b> - first the prefix and then the suffix. Anything between those two will be trated as a property name
-	 * and replaced with a value of that property.
+	 * <b>|</b> - first the prefix and then the suffix. Anything between those two will be trated as a property name and
+	 * replaced with a value of that property.
 	 * 
 	 * @parameter
 	 */
@@ -85,7 +93,7 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	/**
 	 * List of tokens, in form of name-value pair, that should be replaced in given file(s).
 	 * 
-	 * @properties
+	 * @parameter
 	 */
 	protected Properties tokens;
 

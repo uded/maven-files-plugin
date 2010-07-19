@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Random;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.text.StrSubstitutor;
@@ -88,12 +88,20 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 		try {
 			final PropertiesLoader propertiesLoader = new PropertiesLoader(actualDelimiters);
 
+			// TODO PluginParameterExpressionEvaluator to evaluate all of the M2 props
+			// final PluginParameterExpressionEvaluator ppee = new PluginParameterExpressionEvaluator(mavenSession, ,
+			// translator, getLog(), project, project
+			// .getProperties());
+
 			if (useProjectProperties) {
 				// Maven project properties
-				if (project.getProperties() != null) {
+				if (project.getProperties() != null && project.getProperties().size() > 0) {
 					propertiesLoader.loadProperties(project.getProperties());
 				}
 
+				if (mavenSession.getExecutionProperties() != null) {
+					propertiesLoader.loadProperties(mavenSession.getExecutionProperties());
+				}
 				if (mavenSession.getUserProperties() != null) {
 					propertiesLoader.loadProperties(mavenSession.getUserProperties());
 				}

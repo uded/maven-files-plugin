@@ -6,9 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.AutoCloseInputStream;
@@ -50,6 +50,7 @@ public class PropertiesLoader {
 			final String[] delims = delimiter.split("\\|");
 			for (final String key : tokens.keySet()) {
 				final String oldValue = tokens.get(key);
+
 				final String newValue = StrSubstitutor.replace(oldValue, tokens, delims[0], delims[1]);
 				if (!oldValue.equals(newValue)) {
 					tokens.put(key, newValue);
