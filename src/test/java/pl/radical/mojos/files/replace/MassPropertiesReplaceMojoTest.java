@@ -60,7 +60,7 @@ public class MassPropertiesReplaceMojoTest {
 		frr.setReplace("");
 
 		// Actuall work
-		final AbstractMassReplacerMojo mojo = new MassPropertiesReplaceMojo();
+		final MassPropertiesReplaceMojo mojo = new MassPropertiesReplaceMojo();
 		mojo.setLog(new Logger());
 
 		mojo.delimiters = getDelimitersList();
