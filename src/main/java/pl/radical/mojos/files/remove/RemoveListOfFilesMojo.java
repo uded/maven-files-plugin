@@ -18,7 +18,9 @@ import org.apache.maven.project.MavenProject;
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
  * @author Radical Creations &copy;2010
  * @goal remove-files
+ * @deprecated use maven-clean-plugin instead
  */
+@Deprecated
 public class RemoveListOfFilesMojo extends AbstractFileMojo {
 	/**
 	 * Location of the file.
