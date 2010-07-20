@@ -6,14 +6,11 @@ import pl.radical.mojos.replace.utils.FilesScanner;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 import org.apache.maven.model.Resource;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.path.PathTranslator;
 
 /**
@@ -65,15 +62,6 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	protected Resource[] resources;
 
 	/**
-	 * <b>Overrides</b> the default delimiter list. The delimiters should be stated as two strings separated with pipe
-	 * <b>|</b> - first the prefix and then the suffix. Anything between those two will be trated as a property name and
-	 * replaced with a value of that property.
-	 * 
-	 * @parameter
-	 */
-	protected Set<String> delimiters;
-
-	/**
 	 * By defining <code>fileRenameRegexp</code> the files generated via this plugin can be renamed automatically using
 	 * simple regexp.
 	 * 
@@ -112,40 +100,6 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	protected boolean ignoreMissingFilter;
 
 	protected Map<String, String> tokenValueMap = new HashMap<String, String>();
-	protected Set<String> actualDelimiters = new HashSet<String>();
-
-	/**
-	 * <p>
-	 * Get the list of delimiters (proefix and suffix) to be used during string replacement.
-	 * <p>
-	 * If no list was entered by the user, the method will return a list of default delimiters.
-	 * 
-	 * @return list of delimiters (prefix|suffix)
-	 * @throws MojoExecutionException
-	 *             if delimiter was not entered in correct form
-	 */
-	protected void setDelimiters() throws MojoExecutionException {
-		final Set<String> workingDelimiters = new HashSet<String>();
-		if (delimiters == null || delimiters.isEmpty()) {
-			workingDelimiters.add("@|@");
-			workingDelimiters.add("${|}");
-		} else {
-			for (final String delimiter : delimiters) {
-				if (delimiter.matches(".*\\|.*")) {
-					if (getLog().isDebugEnabled()) {
-						final String[] delims = delimiter.split("\\|");
-						workingDelimiters.add(delimiter);
-						getLog().debug("Added prefix: \"" + delims[0] + "\" and suffix: \"" + delims[1] + "\".");
-					}
-				} else {
-					getLog().error("The given delimiter \"" + delimiter + "\" is in illegal form!");
-					throw new MojoExecutionException("The given delimiter \"" + delimiter + "\" is in illegal form!");
-				}
-			}
-		}
-		actualDelimiters.addAll(workingDelimiters);
-	}
-
 	/**
 	 * Scan all of the resources and return the list of files to work on
 	 * 

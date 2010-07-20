@@ -14,7 +14,6 @@ public class MassRegexReplaceMojo extends AbstractMassReplacerMojo {
 	@Override
 	public void readProperties(final MavenProject project) throws MojoExecutionException {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -27,7 +26,6 @@ public class MassRegexReplaceMojo extends AbstractMassReplacerMojo {
 		// }
 		//
 		// tokenValueMap.putAll(propertiesLoader.getTokens());
-
 	}
 
 }
