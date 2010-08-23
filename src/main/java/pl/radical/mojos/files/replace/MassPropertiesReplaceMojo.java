@@ -5,10 +5,12 @@ import pl.radical.mojos.replace.utils.PropertiesLoader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -16,6 +18,7 @@ import org.apache.commons.lang.text.StrSubstitutor;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.codehaus.plexus.logging.Logger;
 
 /**
  * <p>
@@ -30,14 +33,48 @@ import org.apache.maven.project.MavenProject;
  */
 public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 	/**
-     * <b>Overrides</b> the default delimiter list. The delimiters should be stated as two strings separated with pipe
-     * <b>|</b> - first the prefix and then the suffix. Anything between those two will be trated as a property name and
-     * replaced with a value of that property.
-     * 
-     * @parameter
-     */
-    protected Set<String> delimiters;
+	 * <b>Overrides</b> the default delimiter list. The delimiters should be stated as two strings separated with pipe
+	 * <b>|</b> - first the prefix and then the suffix. Anything between those two will be trated as a property name and
+	 * replaced with a value of that property.
+	 * 
+	 * @parameter
+	 */
+	protected Set<String> delimiters;
 	protected Set<String> actualDelimiters = new HashSet<String>();
+
+	/**
+	 * Whether to use or not use project properties. Usually it's a good thing, while you might wanto to reffer to thins
+	 * like <code>${project.version}</code> automatically. But sometimes one may want to keep them separated, and this
+	 * is switch to do so.
+	 * 
+	 * @parameter default-value=true;
+	 */
+	protected boolean useProjectProperties;
+
+	/**
+	 * List of tokens, in form of name-value pair, that should be replaced in given file(s).
+	 * 
+	 * @parameter
+	 */
+	protected Properties tokens;
+
+	/**
+	 * List of properties files to read the token and values from.
+	 * 
+	 * @parameter
+	 */
+	protected List<String> filters;
+
+	/**
+	 * Whether to ignore missing filter, so it will not cause failing the build itself.
+	 * 
+	 * @parameter default-value=false
+	 */
+	protected boolean ignoreMissingFilter;
+
+	protected Map<String, String> tokenValueMap = new HashMap<String, String>();
+
+	Logger logger;
 
 	/*
 	 * (non-Javadoc)
@@ -100,11 +137,6 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 		try {
 			final PropertiesLoader propertiesLoader = new PropertiesLoader(actualDelimiters);
 
-			// TODO PluginParameterExpressionEvaluator to evaluate all of the M2 props
-			// final PluginParameterExpressionEvaluator ppee = new PluginParameterExpressionEvaluator(mavenSession, ,
-			// translator, getLog(), project, project
-			// .getProperties());
-
 			if (useProjectProperties) {
 				// Maven project properties
 				if (project.getProperties() != null && project.getProperties().size() > 0) {
@@ -129,11 +161,8 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 
 			tokenValueMap.putAll(propertiesLoader.getTokens());
 
-			if (getLog().isDebugEnabled()) {
-				// TODO Execution ID would be nice
-				// String id = mavenSession.getExecutionProperties().getProperty("id");
-				final String id = Integer.toString(new Random().nextInt(1000));
-				final File file = new File("target/tokenValueMap." + id + ".properties");
+			if (getLog().isDebugEnabled() && mojoExecution != null) {
+				final File file = new File("target/tokenValueMap." + mojoExecution.getExecutionId() + ".properties");
 				getLog().debug("Outputting the tokenValueMap currently in use to file: " + file.toString());
 				propertiesLoader.writeToFile(file);
 			}
@@ -151,34 +180,34 @@ public class MassPropertiesReplaceMojo extends AbstractMassReplacerMojo {
 	}
 
 	/**
-     * <p>
-     * Get the list of delimiters (proefix and suffix) to be used during string replacement.
-     * <p>
-     * If no list was entered by the user, the method will return a list of default delimiters.
-     * 
-     * @return list of delimiters (prefix|suffix)
-     * @throws MojoExecutionException
-     *             if delimiter was not entered in correct form
-     */
-    protected void setDelimiters() throws MojoExecutionException {
-    	final Set<String> workingDelimiters = new HashSet<String>();
-    	if (delimiters == null || delimiters.isEmpty()) {
-    		workingDelimiters.add("@|@");
-    		workingDelimiters.add("${|}");
-    	} else {
-    		for (final String delimiter : delimiters) {
-    			if (delimiter.matches(".*\\|.*")) {
-    				if (getLog().isDebugEnabled()) {
-    					final String[] delims = delimiter.split("\\|");
-    					workingDelimiters.add(delimiter);
-    					getLog().debug("Added prefix: \"" + delims[0] + "\" and suffix: \"" + delims[1] + "\".");
-    				}
-    			} else {
-    				getLog().error("The given delimiter \"" + delimiter + "\" is in illegal form!");
-    				throw new MojoExecutionException("The given delimiter \"" + delimiter + "\" is in illegal form!");
-    			}
-    		}
-    	}
-    	actualDelimiters.addAll(workingDelimiters);
-    }
+	 * <p>
+	 * Get the list of delimiters (proefix and suffix) to be used during string replacement.
+	 * <p>
+	 * If no list was entered by the user, the method will return a list of default delimiters.
+	 * 
+	 * @return list of delimiters (prefix|suffix)
+	 * @throws MojoExecutionException
+	 *             if delimiter was not entered in correct form
+	 */
+	protected void setDelimiters() throws MojoExecutionException {
+		final Set<String> workingDelimiters = new HashSet<String>();
+		if (delimiters == null || delimiters.isEmpty()) {
+			workingDelimiters.add("@|@");
+			workingDelimiters.add("${|}");
+		} else {
+			for (final String delimiter : delimiters) {
+				if (delimiter.matches(".*\\|.*")) {
+					if (getLog().isDebugEnabled()) {
+						final String[] delims = delimiter.split("\\|");
+						workingDelimiters.add(delimiter);
+						getLog().debug("Added prefix: \"" + delims[0] + "\" and suffix: \"" + delims[1] + "\".");
+					}
+				} else {
+					getLog().error("The given delimiter \"" + delimiter + "\" is in illegal form!");
+					throw new MojoExecutionException("The given delimiter \"" + delimiter + "\" is in illegal form!");
+				}
+			}
+		}
+		actualDelimiters.addAll(workingDelimiters);
+	}
 }

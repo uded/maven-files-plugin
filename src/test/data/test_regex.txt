@@ -1,0 +1,1 @@
+<p><!-- This comment should be removed -->This is a test file to test the inregular expression replacer.</p>

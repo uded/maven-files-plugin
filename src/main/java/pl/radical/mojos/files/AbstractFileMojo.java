@@ -2,6 +2,7 @@ package pl.radical.mojos.files;
 
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
@@ -29,6 +30,14 @@ public abstract class AbstractFileMojo extends AbstractMojo {
 	 * @readonly
 	 */
 	protected MavenSession mavenSession;
+
+	/**
+	 * Mojo execution context
+	 * 
+	 * @parameter expression="${mojoExecution}"
+	 * @readonly
+	 */
+	protected MojoExecution mojoExecution;
 
 	/**
 	 * Encoding that should be used while copying the files.

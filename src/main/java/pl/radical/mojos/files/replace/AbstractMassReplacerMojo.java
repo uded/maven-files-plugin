@@ -6,9 +6,7 @@ import pl.radical.mojos.replace.utils.FilesScanner;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.apache.maven.model.Resource;
 import org.apache.maven.project.path.PathTranslator;
@@ -69,37 +67,6 @@ public abstract class AbstractMassReplacerMojo extends AbstractFileMojo {
 	 */
 	protected FileRenameRegexp fileRenameRegexp;
 
-	/**
-	 * Whether to use or not use project properties. Usually it's a good thing, while you might wanto to reffer to thins
-	 * like <code>${project.version}</code> automatically. But sometimes one may want to keep them separated, and this
-	 * is switch to do so.
-	 * 
-	 * @parameter default-value=true;
-	 */
-	protected boolean useProjectProperties;
-
-	/**
-	 * List of tokens, in form of name-value pair, that should be replaced in given file(s).
-	 * 
-	 * @parameter
-	 */
-	protected Properties tokens;
-
-	/**
-	 * List of properties files to read the token and values from.
-	 * 
-	 * @parameter
-	 */
-	protected List<String> filters;
-
-	/**
-	 * Whether to ignore missing filter, so it will not cause failing the build itself.
-	 * 
-	 * @parameter default-value=false
-	 */
-	protected boolean ignoreMissingFilter;
-
-	protected Map<String, String> tokenValueMap = new HashMap<String, String>();
 	/**
 	 * Scan all of the resources and return the list of files to work on
 	 * 

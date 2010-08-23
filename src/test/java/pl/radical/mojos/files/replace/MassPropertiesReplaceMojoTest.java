@@ -70,7 +70,7 @@ public class MassPropertiesReplaceMojoTest {
 		mojo.fileRenameRegexp = frr;
 
 		final Map<File, File> files = mojo.getFileList();
-		assertEquals(2, files.size());
+		assertEquals(3, files.size());
 
 		mojo.execute();
 		assertEquals(true, fileOutput2.exists());

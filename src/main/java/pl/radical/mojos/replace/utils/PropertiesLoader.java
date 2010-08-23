@@ -15,6 +15,8 @@ import org.apache.commons.io.input.AutoCloseInputStream;
 import org.apache.commons.lang.text.StrSubstitutor;
 
 /**
+ * Properties loader is responsible for loading the properties :-)
+ * 
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
  * @author Radical Creations &copy;2010
  */
@@ -34,7 +36,6 @@ public class PropertiesLoader {
 		fis = new AutoCloseInputStream(new FileInputStream(propertiesFile));
 		props.load(fis);
 		loadProperties(props);
-
 	}
 
 	public final void loadProperties(final Properties properties) throws IOException {
