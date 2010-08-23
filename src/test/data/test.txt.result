@@ -1,2 +1,5 @@
 This is a test, and I want value2 to be replaced-value2.
 This is another test and the complex values should be value1_value2 and value1-delimitered.
+
+Windows path is: c:\users\user\file.txt
+Linux path is: /home/user/file.txt

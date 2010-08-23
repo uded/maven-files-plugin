@@ -1,2 +1,5 @@
 This is a test, and I want value2 to be ${token4}.
 This is another test and the complex values should be ${token6} and @@token7@@.
+
+Windows path is: ${windows.path}
+Linux path is: ${linux.path}
