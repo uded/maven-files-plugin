@@ -1,5 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pl.radical.mojos</groupId>
@@ -13,16 +16,16 @@
 	<inceptionYear>2010</inceptionYear>
 
 	<issueManagement>
-		<system>Redmine</system>
-		<url>http://projekty.radical.com.pl/projects/maven-files-plugin/issues</url>
+		<url>https://github.com/uded/maven-files-plugin/issues</url>
+		<system>Github</system>
 	</issueManagement>
 	<ciManagement>
-		<system>Hudson</system>
-		<url>http://dev.radical.com.pl/hudson/job/maven-files-plugin/</url>
+		<system>Jenkins</system>
+		<url>http://dev.radical.com.pl/jenkins/job/maven-files-plugin/</url>
 	</ciManagement>
 	<scm>
 		<connection>scm:git:git://github.com/uded/maven-files-plugin.git</connection>
-		<developerConnection>scm:svn:https://svn.radical.com.pl/maven2/maven-files-plugin/</developerConnection>
+		<developerConnection>scm:git:git://github.com/uded/maven-files-plugin.git</developerConnection>
 		<tag>HEAD</tag>
 		<url>http://projekty.radical.com.pl/projects/maven-files-plugin/repository</url>
 	</scm>
@@ -180,7 +183,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -199,14 +202,14 @@
 			<version>2.2.1</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.5</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>1.4</version>
+			<version>2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
