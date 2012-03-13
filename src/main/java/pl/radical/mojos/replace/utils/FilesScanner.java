@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.DirectoryScanner;
@@ -45,7 +45,7 @@ public class FilesScanner {
 		if (resource.getExcludes().size() > 0) {
 			if (excludeDefaults) {
 				final String[] resourceExcludes = resource.getExcludes().toArray(new String[resource.getExcludes().size()]);
-				final String[] excludes = (String[]) ArrayUtils.addAll(resourceExcludes, getDefaultExcludes());
+				final String[] excludes = ArrayUtils.addAll(resourceExcludes, getDefaultExcludes());
 				dirScanner.setExcludes(excludes);
 			} else {
 				dirScanner.setExcludes(resource.getExcludes().toArray(new String[resource.getExcludes().size()]));
@@ -68,7 +68,7 @@ public class FilesScanner {
 			String outputFileName;
 			if (fRenameRegxp != null) {
 				outputFileName = file
-				.replaceAll(fRenameRegxp.getPattern(), fRenameRegxp.getReplace() != null ? fRenameRegxp.getReplace() : "");
+						.replaceAll(fRenameRegxp.getPattern(), fRenameRegxp.getReplace() != null ? fRenameRegxp.getReplace() : "");
 			} else {
 				outputFileName = file;
 			}
