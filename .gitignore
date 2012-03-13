@@ -1,0 +1,6 @@
+.classpath
+.project
+.springBeans
+.pmd
+.settings/
+target/
