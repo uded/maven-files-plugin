@@ -83,6 +83,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -121,6 +126,54 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>github</id>
+			<activation>
+				<property>
+					<name>github</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.github.github</groupId>
+						<artifactId>downloads-maven-plugin</artifactId>
+						<version>0.4</version>
+						<configuration>
+							<description>Official ${project.name} build of the ${project.version} release</description>
+							<override>true</override>
+							<includeAttached>true</includeAttached>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>upload</goal>
+								</goals>
+								<phase>install</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.github.github</groupId>
+						<artifactId>site-maven-plugin</artifactId>
+						<version>0.5</version>
+						<configuration>
+							<message>Building site for ${project.version}</message>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>site</goal>
+								</goals>
+								<phase>site</phase>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 	<reporting>
@@ -129,19 +182,25 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
 				<version>2.9</version>
-				<inherited>true</inherited>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.8.1</version>
-				<inherited>true</inherited>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
 				<version>1.3.1</version>
-				<inherited>true</inherited>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>dependency-updates-report</report>
+							<report>plugin-updates-report</report>
+							<report>property-updates-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 		</plugins>
 	</reporting>
@@ -175,6 +234,10 @@
 			<id>radical-snapshots</id>
 			<url>http://dev.radical.com.pl/maven/content/repositories/snapshots</url>
 		</snapshotRepository>
+		<site>
+			<id>radical-dev</id>
+			<url>https://dev.radical.com.pl/projects/maven-files-plugin</url>
+		</site>
 	</distributionManagement>
 
 	<properties>
